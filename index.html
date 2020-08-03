@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Hangman</title>
+    <style type="text/css">
+        body {
+            font-size: 1.5em;
+        }
+    </style>
+    <script type="application/javascript">
+      var Wörter = ["Mensch","grün","Tiger","groß","Stärke","Oskar","Georg","Ben","Thomas","Nico","Marlene"];
+      var zuRatendesWort;
+      var wortBisher;
+
+    var eingabe;
+      function neuesSpiel() {
+          var Nummer = Math.floor(Math.random()*Wörter.length)
+         
+          zuRatendesWort = Wörter[Nummer]
+          wortBisher = ""
+          for(var i = 0; i < zuRatendesWort.length; i = i + 1){
+              wortBisher = wortBisher + "_"
+
+          }
+ 
+          
+          document.getElementById("wort").innerHTML = wortBisher
+      }
+
+      function rateBuchstabe() {
+       eingabe=document.getElementById("buchstabe").value;
+       for(var i = 0; i < zuRatendesWort.length; i = i + 1){
+            if(eingabe==zuRatendesWort[i]){
+                wortBisher = wortBisher.substring(0,i)+eingabe+wortBisher.substring(i+1)
+            }
+        }
+        document.getElementById("wort").innerHTML = wortBisher
+
+        if(wortBisher.indexOf("_") == -1){
+         alert ("du hast gewonnen!!!")
+        }
+      }
+    </script>
+</head>
+<body>
+<h1>Oskars Duijkers hangman</h1>
+<h2>
+    <button type="button" onclick="neuesSpiel()">Neues Spiel</button>
+</h2>
+Wort:
+<span id="wort" style="letter-spacing: 0.5em;"></span>
+<div>
+    Buchstabe:
+    <input id="buchstabe" type="text" maxlength="1" style="width: 15px">
+    <button type="button" onclick="rateBuchstabe()">Rate!</button>
+</div>
+</body>
+</html>
